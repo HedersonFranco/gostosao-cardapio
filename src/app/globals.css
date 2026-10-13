@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* Identidade do cardápio impresso: preto, vermelho e branco. */
+@theme {
+  --color-ink: #0d0d0d; /* fundo */
+  --color-raised: #1a1a1a; /* botões redondos, selo da mesa */
+  --color-surface: #171717; /* campo de busca, cards */
+  --color-line: #2c2c2c; /* bordas */
+  --color-divider: #262626; /* separadores da lista */
+  --color-muted: #b8b8b8; /* ingredientes */
+  --color-subtle: #9a9a9a; /* textos de apoio */
+  --color-brand: #d7191f; /* vermelho das pílulas e rótulos (texto branco por cima) */
+  --color-brand-strong: #b3141a;
+  --color-brand-text: #ff6b6f; /* vermelho para texto sobre o fundo escuro */
+
+  --font-sans: var(--font-montserrat), "Helvetica Neue", Helvetica, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  ::selection {
+    background-color: var(--color-brand);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+
+  /* Usamos nosso próprio botão de limpar a busca. */
+  input[type="search"]::-webkit-search-cancel-button {
+    appearance: none;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

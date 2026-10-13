@@ -1,0 +1,8 @@
+# Finais de linha consistentes entre Windows e Linux (CI/Vercel)
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff2 binary
