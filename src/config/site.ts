@@ -20,11 +20,9 @@ export const site = {
   },
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Gostos%C3%A3o%20Lanches%2C%20Av.%20S%C3%A3o%20Raimundo%2C%202070%2C%20Teresina%20-%20PI",
-  /** Quantidade de mesas: gera um QR code por mesa em /qrcodes. */
-  tables: 20,
   /** Crédito discreto no rodapé. Deixe `url` vazio para mostrar só o nome. */
   developer: {
-    name: "Hederson Lima",
+    name: "Hederson Franco",
     url: "",
   },
 } as const;

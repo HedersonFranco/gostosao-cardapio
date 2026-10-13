@@ -57,18 +57,6 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
-/** Garfo e faca, usado no selo da mesa. */
-export function CutleryIcon(props: IconProps) {
-  return (
-    <StrokeIcon {...props}>
-      <path d="M6 3v7a3 3 0 0 0 3 3v8" />
-      <path d="M12 3v7a3 3 0 0 1-3 3" />
-      <path d="M9 3v6" />
-      <path d="M18 21V3c-2 1-3 3.5-3 7v2h3" />
-    </StrokeIcon>
-  );
-}
-
 export function PrinterIcon(props: IconProps) {
   return (
     <StrokeIcon {...props}>

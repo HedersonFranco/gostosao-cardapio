@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { site } from "@/config/site";
 import { InstagramIcon, PinIcon } from "./icons";
-import { TableBadge } from "./TableBadge";
 
 interface PhotoProps {
   src: string;
@@ -35,7 +34,7 @@ function Photo({ src, alt, size, className, main = false }: PhotoProps) {
 export function Hero() {
   return (
     <header className="mx-auto w-full max-w-xl">
-      <div className="flex items-center justify-between px-4 pt-3">
+      <div className="flex items-center justify-end px-4 pt-3">
         <a
           href={site.instagram.url}
           target="_blank"
@@ -45,7 +44,6 @@ export function Hero() {
         >
           <InstagramIcon className="size-5" />
         </a>
-        <TableBadge />
       </div>
 
       <div className="relative mx-auto mt-1.5 h-[250px] w-[390px] max-w-full">

@@ -3,7 +3,7 @@
 /* Identidade do cardápio impresso: preto, vermelho e branco. */
 @theme {
   --color-ink: #0d0d0d; /* fundo */
-  --color-raised: #1a1a1a; /* botões redondos, selo da mesa */
+  --color-raised: #1a1a1a; /* botões redondos */
   --color-surface: #171717; /* campo de busca, cards */
   --color-line: #2c2c2c; /* bordas */
   --color-divider: #262626; /* separadores da lista */
