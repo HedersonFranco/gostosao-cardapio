@@ -1,86 +1,96 @@
 import Image from "next/image";
 import { site } from "@/config/site";
-import { InstagramIcon, PinIcon } from "./icons";
+import { ArrowDownIcon, InstagramIcon, PinIcon } from "./icons";
 
-interface PhotoProps {
-  src: string;
-  alt: string;
-  size: number;
-  className: string;
-  /** Foto principal: carrega primeiro (é o maior elemento da primeira tela). */
-  main?: boolean;
-}
-
-/** Foto redonda com aro vermelho, como no cardápio impresso. */
-function Photo({ src, alt, size, className, main = false }: PhotoProps) {
-  return (
-    <div
-      className={`absolute overflow-hidden rounded-full border-brand bg-surface ${className}`}
-      style={{ width: size, height: size }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes={`${size}px`}
-        className="object-cover"
-        loading={main ? "eager" : "lazy"}
-        fetchPriority={main ? "high" : "auto"}
-      />
-    </div>
-  );
-}
-
+/**
+ * Primeira tela.
+ * Celular: foto de ponta a ponta com o texto por cima.
+ * Computador: texto à esquerda e foto ocupando a metade direita, para a imagem não ser esticada.
+ */
 export function Hero() {
   return (
-    <header className="mx-auto w-full max-w-xl">
-      <div className="flex items-center justify-end px-4 pt-3">
-        <a
-          href={site.instagram.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Instagram do ${site.name} (@${site.instagram.handle})`}
-          className="grid size-11 place-items-center rounded-full border border-line bg-raised transition-colors hover:border-white/40"
-        >
-          <InstagramIcon className="size-5" />
-        </a>
-      </div>
-
-      <div className="relative mx-auto mt-1.5 h-[250px] w-[390px] max-w-full">
-        <Photo
-          src="/images/fries-sq.webp"
-          alt="Porção de batata frita"
-          size={136}
-          className="top-[74px] left-2 border-[5px] shadow-[0_12px_32px_rgba(0,0,0,0.7)]"
-        />
-        <Photo
-          src="/images/burger-plate-sq.webp"
+    <header className="relative h-[600px] w-full overflow-hidden md:h-[640px] lg:h-[min(88vh,800px)] lg:min-h-[620px]">
+      <div className="absolute inset-0 lg:left-auto lg:w-[58%]">
+        <Image
+          src="/images/hero.webp"
           alt="Hambúrguer com batata frita no prato"
-          size={136}
-          className="top-[74px] right-2 border-[5px] shadow-[0_12px_32px_rgba(0,0,0,0.7)]"
+          fill
+          sizes="(min-width: 1024px) 58vw, 100vw"
+          className="object-cover object-[32%_50%] lg:object-[40%_50%]"
+          loading="eager"
+          fetchPriority="high"
         />
-        <Photo
-          src="/images/burger-sq.webp"
-          alt="Hambúrguer com batata frita sobre tábua"
-          size={204}
-          main
-          className="top-2 left-1/2 z-10 -translate-x-1/2 border-[6px] shadow-[0_16px_40px_rgba(0,0,0,0.8)]"
+        {/* Computador: a foto se funde com o fundo à esquerda e embaixo (dentro da mesma caixa, sem emenda) */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 -left-px hidden w-[38%] bg-[linear-gradient(90deg,#0b0b0b_0%,rgba(11,11,11,0)_100%)] lg:block"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 hidden h-[160px] bg-[linear-gradient(180deg,rgba(11,11,11,0)_0%,#0b0b0b_100%)] lg:block"
         />
       </div>
 
-      <div className="flex flex-col items-center px-5 text-center">
-        <h1 className="flex flex-col items-center gap-2.5">
-          <span className="text-[clamp(44px,15vw,54px)] leading-none font-black tracking-[-1.5px] uppercase">
-            Gostosão
-          </span>{" "}
-          <span className="rounded-lg bg-brand py-[7px] pr-3.5 pl-5 text-base font-extrabold tracking-[6px] uppercase">
-            Lanches
+      {/* Sombras para o texto ficar legível sobre a foto */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-[130px] bg-[linear-gradient(180deg,rgba(11,11,11,0.78)_0%,rgba(11,11,11,0)_100%)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 h-[480px] bg-[linear-gradient(180deg,rgba(11,11,11,0)_0%,rgba(11,11,11,0.9)_38%,#0b0b0b_100%)] lg:hidden"
+      />
+
+      <div className="absolute inset-x-0 top-0">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 pt-3 md:px-8 lg:px-10 lg:pt-6">
+          <span aria-hidden="true" className="font-display text-2xl tracking-[1px] uppercase lg:text-3xl">
+            Gostosão<span className="text-brand">.</span>
           </span>
-        </h1>
-        <p className="mt-4 flex items-center gap-1.5 text-[13px] font-semibold text-[#bdbdbd]">
-          <PinIcon className="size-4 shrink-0" />
-          {site.address.street} · {site.address.neighborhood}
-        </p>
+          <a
+            href={site.instagram.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Instagram do ${site.name} (@${site.instagram.handle})`}
+            className="grid size-11 place-items-center rounded-full border border-white/25 bg-ink/60 backdrop-blur-sm transition-colors hover:border-white/60"
+          >
+            <InstagramIcon className="size-5" />
+          </a>
+        </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 lg:top-0 lg:flex lg:items-center">
+        <div className="mx-auto w-full max-w-6xl px-5 pb-6 md:px-8 md:pb-10 lg:px-10 lg:pb-0">
+          <div className="flex flex-col lg:max-w-[560px]">
+            <p className="mb-3 text-xs font-extrabold tracking-[3px] text-brand-text uppercase lg:mb-5 lg:text-sm">
+              Cardápio · {site.address.neighborhood}, {site.address.city}
+            </p>
+            <h1 className="font-display text-[clamp(64px,21.5vw,84px)] leading-[0.9] tracking-[0.5px] uppercase md:text-[112px] lg:text-[clamp(112px,10.5vw,152px)]">
+              <span className="block">Gostosão</span>{" "}
+              <span className="block text-transparent [-webkit-text-stroke:2px_var(--color-paper)]">Lanches</span>
+            </h1>
+            <p className="mt-3.5 max-w-[300px] text-[15px] leading-relaxed text-[#d6d6d6] lg:mt-6 lg:max-w-[420px] lg:text-lg">
+              Sanduíches, batata frita, tira-gosto e bebidas.
+            </p>
+            <div className="mt-[18px] flex gap-2.5 md:max-w-[440px] lg:mt-8">
+              <a
+                href="#cardapio"
+                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[14px] bg-brand text-[15px] font-extrabold text-white transition-colors hover:bg-brand-strong"
+              >
+                Ver cardápio
+                <ArrowDownIcon className="size-[18px]" strokeWidth={2.4} />
+              </a>
+              <a
+                href={site.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-[52px] items-center gap-2 rounded-[14px] border border-white/30 px-[18px] text-[15px] font-bold transition-colors hover:border-white/60"
+              >
+                <PinIcon className="size-[18px]" />
+                Como chegar
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );

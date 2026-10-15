@@ -14,6 +14,11 @@ export const menu: MenuSection[] = [
     id: "sanduiches",
     name: "Sanduíches",
     image: { src: "/images/burger-plate-sq.webp", alt: "Hambúrguer com batata frita no prato" },
+    highlight: {
+      itemId: "gostosao",
+      label: "O lanche que dá nome à casa",
+      image: { src: "/images/gostosao-destaque.webp", alt: "Hambúrguer com batata frita sobre tábua de madeira" },
+    },
     items: [
       { id: "misto", name: "Misto", description: "Pão, queijo e presunto", price: 800 },
       { id: "hamburguer", name: "Hambúrguer", description: "Pão, carne e salada", price: 1090 },

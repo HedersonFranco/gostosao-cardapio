@@ -23,5 +23,6 @@ SOFTWARE.
 ---
 
 A licença MIT vale para o código. O nome, a marca, o cardápio e as fotos são do
-Gostosão Lanches e não estão incluídos nela. A fonte Montserrat
-(src/app/fonts) é distribuída sob a SIL Open Font License 1.1 (veja OFL.txt).
+Gostosão Lanches e não estão incluídos nela. As fontes Anton e Manrope
+(src/app/fonts) são distribuídas sob a SIL Open Font License 1.1 (veja os
+arquivos OFL-*.txt).

@@ -57,6 +57,15 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
+export function ArrowDownIcon(props: IconProps) {
+  return (
+    <StrokeIcon {...props}>
+      <path d="M12 5v14" />
+      <path d="m6 13 6 6 6-6" />
+    </StrokeIcon>
+  );
+}
+
 export function PrinterIcon(props: IconProps) {
   return (
     <StrokeIcon {...props}>
@@ -74,17 +83,5 @@ export function AlertIcon(props: IconProps) {
       <path d="M12 9v4" />
       <path d="M12 17h.01" />
     </StrokeIcon>
-  );
-}
-
-/** Marcador em forma de etiqueta, igual ao do cardápio impresso. */
-export function TagBullet(props: IconProps) {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 18 14" {...props}>
-      <path
-        d="M0 2a2 2 0 0 1 2-2h9.2a2 2 0 0 1 1.5.7l4.6 5.3a1.5 1.5 0 0 1 0 2l-4.6 5.3a2 2 0 0 1-1.5.7H2a2 2 0 0 1-2-2z"
-        fill="currentColor"
-      />
-    </svg>
   );
 }

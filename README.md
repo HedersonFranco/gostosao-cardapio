@@ -5,14 +5,18 @@ Projeto solo de estudo: testar design de front-end e aprender, de ponta a ponta,
 A ideia veio de uma lanchonete aqui perto, o Gostosão Lanches, em Teresina. O cardápio deles só existia impresso, então virou um site simples: um QR code nas mesas abre o cardápio pra consultar os preços. É estudo, mas com cliente de verdade.
 
 <p align="center">
-  <img src="docs/screenshots/celular.png" alt="Três telas do cardápio no celular: topo com as fotos e o nome da lanchonete, barra de categorias em Cervejas e busca por bacon" width="860">
+  <img src="docs/screenshots/celular.png" alt="Três telas do cardápio no celular: hero com foto de ponta a ponta, seção de Cervejas com preços pontilhados e busca por bacon" width="860">
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/computador.jpg" alt="Topo do cardápio no computador: nome da lanchonete em letras grandes à esquerda e foto do lanche à direita" width="860">
 </p>
 
 ## O que estou praticando
 
-- **Design mobile:** levar a cara do cardápio impresso (preto, vermelho, fotos em círculo e preço em pílula) pra tela do celular.
+- **Design responsivo:** uma hero page imersiva, com foto de ponta a ponta, tipografia condensada (Anton) e o preto e vermelho da marca; carrossel de categorias com foto e lista com o pontilhado clássico de cardápio. No computador, a foto vai pra metade direita, as categorias viram uma coluna lateral e a lista ganha duas colunas.
 - **Next.js, TypeScript e Tailwind:** App Router, componentes de servidor e de cliente, site exportado como estático.
-- **Experiência de cardápio:** busca sem acento e barra de categorias que acompanha a rolagem.
+- **Experiência de cardápio:** busca sem acento, abas de categoria que acompanham a rolagem e o lanche da casa em destaque.
 - **O caminho até produção:** testes, CI no GitHub Actions, deploy automático, SEO e acessibilidade.
 
 ## Pra rodar

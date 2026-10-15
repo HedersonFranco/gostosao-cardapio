@@ -1,19 +1,21 @@
 @import "tailwindcss";
 
-/* Identidade do cardápio impresso: preto, vermelho e branco. */
+/* Visual "Imersivo": foto de ponta a ponta, tipografia condensada e vermelho da marca. */
 @theme {
-  --color-ink: #0d0d0d; /* fundo */
-  --color-raised: #1a1a1a; /* botões redondos */
-  --color-surface: #171717; /* campo de busca, cards */
-  --color-line: #2c2c2c; /* bordas */
-  --color-divider: #262626; /* separadores da lista */
-  --color-muted: #b8b8b8; /* ingredientes */
-  --color-subtle: #9a9a9a; /* textos de apoio */
-  --color-brand: #d7191f; /* vermelho das pílulas e rótulos (texto branco por cima) */
-  --color-brand-strong: #b3141a;
+  --color-ink: #0b0b0b; /* fundo */
+  --color-paper: #f5f5f5; /* texto principal */
+  --color-surface: #161616; /* campo de busca, cards, chips */
+  --color-line: #262626; /* bordas */
+  --color-divider: #1f1f1f; /* separadores da lista */
+  --color-leader: #3a3a3a; /* pontilhado entre nome e preço */
+  --color-muted: #a8a8a8; /* ingredientes */
+  --color-subtle: #a3a3a3; /* abas inativas, textos de apoio */
+  --color-brand: #e01f26; /* vermelho dos botões (texto branco por cima) */
+  --color-brand-strong: #b8141a;
   --color-brand-text: #ff6b6f; /* vermelho para texto sobre o fundo escuro */
 
-  --font-sans: var(--font-montserrat), "Helvetica Neue", Helvetica, sans-serif;
+  --font-sans: var(--font-manrope), "Helvetica Neue", Helvetica, sans-serif;
+  --font-display: var(--font-anton), Impact, "Arial Narrow", sans-serif;
 }
 
 @layer base {
@@ -30,7 +32,7 @@
 
   body {
     background-color: var(--color-ink);
-    color: #fff;
+    color: var(--color-paper);
     -webkit-tap-highlight-color: transparent;
   }
 

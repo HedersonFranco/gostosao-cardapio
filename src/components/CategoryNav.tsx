@@ -1,67 +1,27 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import type { MenuSection } from "@/lib/types";
 import { SearchIcon } from "./icons";
 
-interface CategoryNavProps {
-  sections: { id: string; name: string }[];
-  onSearchClick: () => void;
+interface NavProps {
+  sections: MenuSection[];
+  active: string | undefined;
+  onSelect: (id: string) => void;
 }
 
-/** Distância do topo em que uma seção passa a contar como "atual" (altura da barra + folga). */
-const ACTIVE_OFFSET = 96;
-
-/** Barra fixa com as categorias; destaca a seção que está na tela enquanto o cliente rola. */
-export function CategoryNav({ sections, onSearchClick }: CategoryNavProps) {
-  const [active, setActive] = useState<string | undefined>(sections[0]?.id);
+/** Celular e tablet: abas fixas no topo, com rolagem horizontal. */
+export function CategoryTabs({ sections, active, onSelect, onSearchClick }: NavProps & { onSearchClick: () => void }) {
   const listRef = useRef<HTMLUListElement>(null);
-  const ids = sections.map((section) => section.id).join("|");
-
-  // Descobre a seção atual a partir da posição de rolagem
-  useEffect(() => {
-    const elements = ids
-      .split("|")
-      .map((id) => document.getElementById(id))
-      .filter((element): element is HTMLElement => element !== null);
-    if (elements.length === 0) return;
-
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      let current = elements[0].id;
-      if (atBottom) {
-        current = elements[elements.length - 1].id;
-      } else {
-        for (const element of elements) {
-          if (element.getBoundingClientRect().top - ACTIVE_OFFSET > 0) break;
-          current = element.id;
-        }
-      }
-      setActive(current);
-    };
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-      cancelAnimationFrame(frame);
-    };
-  }, [ids]);
 
   // Mantém a categoria ativa visível na barra horizontal
   useEffect(() => {
     const list = listRef.current;
-    const chip = list?.querySelector<HTMLElement>(`[data-section="${active}"]`);
-    if (!list || !chip) return;
+    const tab = list?.querySelector<HTMLElement>(`[data-section="${active}"]`);
+    if (!list || !tab || list.offsetParent === null) return;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     list.scrollTo({
-      left: chip.offsetLeft - list.clientWidth / 2 + chip.clientWidth / 2,
+      left: tab.offsetLeft - list.clientWidth / 2 + tab.clientWidth / 2,
       behavior: reduceMotion ? "auto" : "smooth",
     });
   }, [active]);
@@ -69,18 +29,18 @@ export function CategoryNav({ sections, onSearchClick }: CategoryNavProps) {
   return (
     <nav
       aria-label="Categorias do cardápio"
-      className="sticky top-0 z-20 mt-3.5 border-b border-divider bg-ink/90 backdrop-blur-md"
+      className="sticky top-0 z-20 mt-1.5 border-b border-divider bg-ink/90 backdrop-blur-md lg:hidden"
     >
-      <div className="flex items-center gap-2 py-3 pl-4">
+      <div className="flex items-center gap-3 pl-5 md:pl-8">
         <button
           type="button"
           onClick={onSearchClick}
           aria-label="Buscar no cardápio"
-          className="grid size-11 shrink-0 place-items-center rounded-full border border-line bg-surface text-white transition-colors hover:border-white/40"
+          className="grid size-11 shrink-0 place-items-center rounded-full text-subtle transition-colors hover:text-paper"
         >
           <SearchIcon className="size-5" />
         </button>
-        <ul ref={listRef} className="no-scrollbar relative flex flex-1 gap-2 overflow-x-auto pr-4">
+        <ul ref={listRef} className="no-scrollbar relative flex flex-1 gap-[22px] overflow-x-auto pr-5">
           {sections.map((section) => {
             const isActive = section.id === active;
             return (
@@ -89,11 +49,11 @@ export function CategoryNav({ sections, onSearchClick }: CategoryNavProps) {
                   href={`#${section.id}`}
                   data-section={section.id}
                   aria-current={isActive ? "true" : undefined}
-                  onClick={() => setActive(section.id)}
-                  className={`flex h-11 items-center rounded-full border px-[18px] text-sm whitespace-nowrap transition-colors ${
+                  onClick={() => onSelect(section.id)}
+                  className={`flex h-[52px] items-center border-b-[3px] text-sm whitespace-nowrap transition-colors ${
                     isActive
-                      ? "border-brand bg-brand font-extrabold"
-                      : "border-line bg-surface font-bold hover:border-white/40"
+                      ? "border-brand font-extrabold text-paper"
+                      : "border-transparent font-bold text-subtle hover:text-paper"
                   }`}
                 >
                   {section.name}
@@ -103,6 +63,37 @@ export function CategoryNav({ sections, onSearchClick }: CategoryNavProps) {
           })}
         </ul>
       </div>
+    </nav>
+  );
+}
+
+/** Computador: lista vertical na lateral, que acompanha a rolagem. */
+export function CategorySidebar({ sections, active, onSelect }: NavProps) {
+  return (
+    <nav aria-label="Categorias do cardápio" className="mt-6 hidden lg:block">
+      <ul className="flex flex-col">
+        {sections.map((section) => {
+          const isActive = section.id === active;
+          const count = section.kind === "items" ? section.items.length : section.options.length;
+          return (
+            <li key={section.id}>
+              <a
+                href={`#${section.id}`}
+                aria-current={isActive ? "true" : undefined}
+                onClick={() => onSelect(section.id)}
+                className={`flex h-11 items-center gap-3 border-l-[3px] pr-2 pl-4 text-[15px] transition-colors ${
+                  isActive
+                    ? "border-brand font-extrabold text-paper"
+                    : "border-line font-semibold text-subtle hover:border-white/40 hover:text-paper"
+                }`}
+              >
+                {section.name}
+                <span className="ml-auto text-xs font-bold text-subtle tabular-nums">{count}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
   );
 }

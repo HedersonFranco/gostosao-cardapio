@@ -1,3 +1,4 @@
+import { CategoryTiles } from "@/components/CategoryTiles";
 import { Hero } from "@/components/Hero";
 import { MenuBrowser } from "@/components/MenuBrowser";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -20,6 +21,7 @@ export default function Home() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(jsonLd) }} />
       <Hero />
+      <CategoryTiles sections={menu} />
       <MenuBrowser sections={menu} />
       <SiteFooter />
     </>

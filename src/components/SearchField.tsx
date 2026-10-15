@@ -11,11 +11,11 @@ interface SearchFieldProps {
 
 export function SearchField({ value, onChange }: SearchFieldProps) {
   return (
-    <div className="px-4 pt-[22px]">
+    <div className="px-5 pt-7 md:px-8 lg:px-0 lg:pt-0">
       <label htmlFor={SEARCH_INPUT_ID} className="sr-only">
         Buscar no cardápio
       </label>
-      <div className="flex h-[52px] items-center gap-2.5 rounded-[14px] border border-line bg-surface pr-1.5 pl-4 text-subtle transition-colors focus-within:border-white/60">
+      <div className="flex h-[50px] items-center gap-2.5 rounded-[14px] border border-line bg-surface pr-1.5 pl-4 text-subtle transition-colors focus-within:border-white/60">
         <SearchIcon className="size-5 shrink-0" />
         <input
           id={SEARCH_INPUT_ID}
@@ -26,17 +26,17 @@ export function SearchField({ value, onChange }: SearchFieldProps) {
             // "Buscar" no teclado do celular: fecha o teclado e mostra os resultados
             if (event.key === "Enter") event.currentTarget.blur();
           }}
-          placeholder="Buscar lanche, bebida ou ingrediente"
+          placeholder="O que você procura?"
           autoComplete="off"
           enterKeyHint="search"
-          className="h-full min-w-0 flex-1 bg-transparent text-[15px] font-semibold text-white outline-none placeholder:text-subtle focus-visible:outline-none"
+          className="h-full min-w-0 flex-1 bg-transparent text-[15px] font-semibold text-paper outline-none placeholder:text-subtle focus-visible:outline-none"
         />
         {value && (
           <button
             type="button"
             onClick={() => onChange("")}
             aria-label="Limpar busca"
-            className="grid size-10 shrink-0 place-items-center rounded-full text-white transition-colors hover:bg-white/10"
+            className="grid size-10 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
           >
             <CloseIcon className="size-5" />
           </button>

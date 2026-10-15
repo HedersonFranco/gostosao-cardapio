@@ -41,8 +41,20 @@ describe("dados do cardápio", () => {
 
   it("aponta para imagens que existem em /public", () => {
     for (const section of menu) {
-      if (!section.image) continue;
-      expect(existsSync(join(process.cwd(), "public", section.image.src)), section.image.src).toBe(true);
+      const images = [section.image, section.kind === "items" ? section.highlight?.image : undefined];
+      for (const image of images) {
+        if (!image) continue;
+        expect(existsSync(join(process.cwd(), "public", image.src)), image.src).toBe(true);
+      }
+    }
+  });
+
+  it("destaca um item que existe na própria categoria", () => {
+    for (const section of menu) {
+      if (section.kind !== "items" || !section.highlight) continue;
+      const item = section.items.find((candidate) => candidate.id === section.highlight?.itemId);
+      expect(item, section.highlight.itemId).toBeDefined();
+      expect(item?.price, "o destaque precisa de preço único").toBeDefined();
     }
   });
 

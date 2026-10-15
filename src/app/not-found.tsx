@@ -2,12 +2,16 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-xl flex-col items-center justify-center gap-4 px-6 text-center">
-      <p className="rounded-lg bg-brand px-3 py-1.5 text-sm font-black tracking-[2px] uppercase">Página não encontrada</p>
-      <h1 className="text-3xl font-black">Esse lanche não está no cardápio.</h1>
+    <main className="mx-auto flex min-h-dvh max-w-xl flex-col items-start justify-center gap-4 px-6">
+      <p className="text-xs font-extrabold tracking-[3px] text-brand-text uppercase">Erro 404</p>
+      <h1 className="font-display text-6xl leading-[0.9] uppercase">
+        <span className="block">Esse lanche</span>{" "}
+        <span className="block text-transparent [-webkit-text-stroke:2px_var(--color-paper)]">não existe</span>
+      </h1>
+      <p className="text-[15px] text-muted">A página que você procurou não está no cardápio.</p>
       <Link
         href="/"
-        className="mt-2 flex h-12 items-center rounded-xl bg-white px-6 text-[15px] font-extrabold text-ink transition-colors hover:bg-white/90"
+        className="mt-2 flex h-[52px] items-center rounded-[14px] bg-brand px-6 text-[15px] font-extrabold text-white transition-colors hover:bg-brand-strong"
       >
         Ver o cardápio
       </Link>

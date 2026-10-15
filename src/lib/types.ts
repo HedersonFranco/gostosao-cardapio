@@ -32,10 +32,20 @@ interface SectionBase {
   image?: SectionImage;
 }
 
+/** Item em destaque no topo de uma categoria, com foto. */
+export interface SectionHighlight {
+  /** id de um item desta mesma categoria. */
+  itemId: string;
+  /** Frase curta acima do nome, ex.: "O lanche que dá nome à casa". */
+  label: string;
+  image: SectionImage;
+}
+
 /** Categoria com lista de itens (sanduíches, cervejas...). */
 export interface ItemsSection extends SectionBase {
   kind: "items";
   items: MenuItem[];
+  highlight?: SectionHighlight;
 }
 
 /** Grupo de adicionais com preço único por opção. */

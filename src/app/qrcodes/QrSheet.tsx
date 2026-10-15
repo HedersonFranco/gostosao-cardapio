@@ -49,7 +49,7 @@ function MenuCard({ qrSrc, handle, address, copy }: Omit<QrSheetProps, "url"> & 
       className="@container relative overflow-hidden bg-white text-[#111] outline-[0.2mm] outline-neutral-300 outline-dashed"
     >
       <div className="flex h-[37.6cqw] flex-col items-center justify-center gap-[2.2cqw] bg-brand">
-        <span className="text-[10.7cqw] leading-none font-black tracking-[-0.27cqw] text-white uppercase">Gostosão</span>
+        <span className="font-display text-[14cqw] leading-none tracking-[0.2cqw] text-white uppercase">Gostosão</span>
         <span className="rounded-[1.4cqw] bg-[#111] py-[1.25cqw] pr-[2.5cqw] pl-[3.75cqw] text-[3.2cqw] font-extrabold tracking-[1.25cqw] text-white uppercase">
           Lanches
         </span>
@@ -60,7 +60,7 @@ function MenuCard({ qrSrc, handle, address, copy }: Omit<QrSheetProps, "url"> & 
           {/* eslint-disable-next-line @next/next/no-img-element -- QR em SVG gerado no build */}
           <img src={qrSrc} alt="QR code do cardápio" className="block size-[47cqw]" />
         </div>
-        <p className="mt-[3.9cqw] text-center text-[8.2cqw] leading-[1.05] font-black tracking-[-0.18cqw]">Veja o cardápio</p>
+        <p className="mt-[3.9cqw] text-center font-display text-[9.5cqw] leading-none tracking-[0.1cqw] uppercase">Veja o cardápio</p>
         <p className="mt-[1.4cqw] text-center text-[3.2cqw] leading-[1.4] font-semibold text-[#333]">
           Aponte a câmera do celular para o código
         </p>
@@ -86,7 +86,7 @@ export function QrSheet({ url, qrSrc, handle, address }: QrSheetProps) {
       <style>{`@page { size: A4 ${size === "a5" ? "landscape" : "portrait"}; margin: 0; }`}</style>
 
       <div className="mx-auto max-w-3xl px-4 py-8 print:hidden">
-        <h1 className="text-3xl font-black">QR code do cardápio</h1>
+        <h1 className="font-display text-4xl uppercase">QR code do cardápio</h1>
         <p className="mt-2 text-sm leading-relaxed text-neutral-700">
           O mesmo código serve para todas as mesas: imprima a folha quantas vezes precisar e recorte na linha
           tracejada.
