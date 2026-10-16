@@ -11,7 +11,8 @@ export function CategoryTiles({ sections }: { sections: MenuSection[] }) {
       <h2 id="categorias-titulo" className="mb-3.5 px-5 font-display text-[26px] tracking-[0.5px] uppercase md:px-8 lg:mb-5 lg:px-10 lg:text-4xl">
         Categorias
       </h2>
-      <ul className="no-scrollbar flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 md:px-8 lg:grid lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-10">
+      {/* py-1 -my-1: espaço para o contorno de foco, que a rolagem horizontal cortaria em cima e embaixo */}
+      <ul className="no-scrollbar -my-1 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 py-1 md:px-8 lg:grid lg:grid-cols-6 lg:gap-4 lg:overflow-visible lg:px-10">
         {tiles.map((section) => {
           const count = section.kind === "items" ? section.items.length : section.options.length;
           return (

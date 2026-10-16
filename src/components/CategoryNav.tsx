@@ -50,7 +50,8 @@ export function CategoryTabs({ sections, active, onSelect, onSearchClick }: NavP
                   data-section={section.id}
                   aria-current={isActive ? "true" : undefined}
                   onClick={() => onSelect(section.id)}
-                  className={`flex h-[52px] min-w-11 items-center justify-center border-b-[3px] text-sm whitespace-nowrap transition-colors ${
+                  // Contorno de foco por dentro: a lista com rolagem horizontal cortaria o de fora
+                  className={`flex h-[52px] min-w-11 items-center justify-center border-b-[3px] text-sm whitespace-nowrap -outline-offset-2 transition-colors ${
                     isActive
                       ? "border-brand font-extrabold text-paper"
                       : "border-transparent font-bold text-subtle hover:text-paper"
@@ -81,7 +82,7 @@ export function CategorySidebar({ sections, active, onSelect }: NavProps) {
                 href={`#${section.id}`}
                 aria-current={isActive ? "true" : undefined}
                 onClick={() => onSelect(section.id)}
-                className={`flex h-11 items-center gap-3 border-l-[3px] pr-2 pl-4 text-[15px] transition-colors ${
+                className={`flex h-11 items-center gap-3 border-l-[3px] pr-2 pl-4 text-[15px] -outline-offset-2 transition-colors ${
                   isActive
                     ? "border-brand font-extrabold text-paper"
                     : "border-line font-semibold text-subtle hover:border-white/40 hover:text-paper"
