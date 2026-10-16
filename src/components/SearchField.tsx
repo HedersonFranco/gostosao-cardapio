@@ -29,7 +29,8 @@ export function SearchField({ value, onChange }: SearchFieldProps) {
           placeholder="O que você procura?"
           autoComplete="off"
           enterKeyHint="search"
-          className="h-full min-w-0 flex-1 bg-transparent text-[15px] font-semibold text-paper outline-none placeholder:text-subtle focus-visible:outline-none"
+          // 16 px no mínimo: com fonte menor, o iPhone dá zoom na página ao focar o campo
+          className="h-full min-w-0 flex-1 bg-transparent text-base font-semibold text-paper outline-none placeholder:text-subtle focus-visible:outline-none"
         />
         {value && (
           <button
