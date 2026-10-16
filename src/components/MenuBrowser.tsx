@@ -55,7 +55,10 @@ export function MenuBrowser({ sections }: { sections: MenuSection[] }) {
           <p className="mt-2 text-sm text-muted">Tente outra palavra, como “bacon”, “suco” ou “cerveja”.</p>
           <button
             type="button"
-            onClick={() => setQuery("")}
+            onClick={() => {
+              setQuery("");
+              focusSearch();
+            }}
             className="mt-6 h-11 rounded-full border border-line px-5 text-sm font-bold transition-colors hover:border-white/40"
           >
             Limpar busca

@@ -35,7 +35,11 @@ export function SearchField({ value, onChange }: SearchFieldProps) {
         {value && (
           <button
             type="button"
-            onClick={() => onChange("")}
+            onClick={() => {
+              onChange("");
+              // O botão some com o campo vazio; o foco volta para o campo em vez de cair no início da página
+              document.getElementById(SEARCH_INPUT_ID)?.focus();
+            }}
             aria-label="Limpar busca"
             className="grid size-11 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
           >
