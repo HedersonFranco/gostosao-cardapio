@@ -71,10 +71,11 @@ export function Hero() {
             <p className="mt-3.5 max-w-[300px] text-[15px] leading-relaxed text-[#d6d6d6] lg:mt-6 lg:max-w-[420px] lg:text-lg">
               Sanduíches, batata frita, tira-gosto e bebidas.
             </p>
-            <div className="mt-[18px] flex gap-2.5 md:max-w-[440px] lg:mt-8">
+            {/* Abaixo de 360 px os dois botões não cabem lado a lado: um fica embaixo do outro */}
+            <div className="mt-[18px] flex flex-col gap-2.5 min-[360px]:flex-row md:max-w-[440px] lg:mt-8">
               <a
                 href="#cardapio"
-                className="flex h-[52px] flex-1 items-center justify-center gap-2 rounded-[14px] bg-brand text-[15px] font-extrabold text-white transition-colors hover:bg-brand-strong"
+                className="flex h-[52px] items-center justify-center gap-2 rounded-[14px] bg-brand text-[15px] font-extrabold text-white transition-colors hover:bg-brand-strong min-[360px]:flex-1"
               >
                 Ver cardápio
                 <ArrowDownIcon className="size-[18px]" strokeWidth={2.4} />
@@ -83,7 +84,7 @@ export function Hero() {
                 href={site.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-[52px] items-center gap-2 rounded-[14px] border border-white/30 px-[18px] text-[15px] font-bold transition-colors hover:border-white/60"
+                className="flex h-[52px] items-center justify-center gap-2 rounded-[14px] border border-white/30 px-[18px] text-[15px] font-bold transition-colors hover:border-white/60"
               >
                 <PinIcon className="size-[18px]" />
                 Como chegar
