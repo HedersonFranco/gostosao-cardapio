@@ -19,7 +19,8 @@ export function MenuBrowser({ sections }: { sections: MenuSection[] }) {
 
   const focusSearch = () => {
     const input = document.getElementById(SEARCH_INPUT_ID);
-    input?.scrollIntoView({ block: "center", behavior: "smooth" });
+    // Sem `behavior`: vale o scroll-behavior do CSS, que já respeita o "reduzir movimento"
+    input?.scrollIntoView({ block: "center" });
     input?.focus({ preventScroll: true });
   };
 
