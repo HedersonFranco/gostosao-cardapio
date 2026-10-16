@@ -81,7 +81,8 @@ export function QrSheet({ url, qrSrc, handle, address }: QrSheetProps) {
   const copies = Array.from({ length: config.perPage }, (_, index) => index);
 
   return (
-    <main className="min-h-dvh bg-neutral-200 pb-10 text-[#111] print:bg-white print:p-0">
+    // Página clara: o contorno de foco branco do site some aqui, então ele fica escuro
+    <main className="min-h-dvh bg-neutral-200 pb-10 text-[#111] print:bg-white print:p-0 [&_:focus-visible]:outline-[#111]">
       {/* Tamanho do papel na impressão: A4, sem margens (os cartões já têm respiro). */}
       <style>{`@page { size: A4 ${size === "a5" ? "landscape" : "portrait"}; margin: 0; }`}</style>
 
@@ -113,7 +114,8 @@ export function QrSheet({ url, qrSrc, handle, address }: QrSheetProps) {
             {(Object.keys(SIZES) as CardSize[]).map((key) => (
               <label
                 key={key}
-                className={`flex h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-bold ${
+                // O rádio é invisível (sr-only), então o foco do teclado aparece no rótulo
+                className={`flex h-11 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-bold has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-[#111] ${
                   size === key ? "border-[#111] bg-[#111] text-white" : "border-neutral-400 bg-white"
                 }`}
               >
