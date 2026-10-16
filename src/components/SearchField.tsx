@@ -37,7 +37,7 @@ export function SearchField({ value, onChange }: SearchFieldProps) {
             type="button"
             onClick={() => onChange("")}
             aria-label="Limpar busca"
-            className="grid size-10 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
+            className="grid size-11 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
           >
             <CloseIcon className="size-5" />
           </button>

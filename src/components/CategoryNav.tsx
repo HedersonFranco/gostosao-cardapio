@@ -50,7 +50,7 @@ export function CategoryTabs({ sections, active, onSelect, onSearchClick }: NavP
                   data-section={section.id}
                   aria-current={isActive ? "true" : undefined}
                   onClick={() => onSelect(section.id)}
-                  className={`flex h-[52px] items-center border-b-[3px] text-sm whitespace-nowrap transition-colors ${
+                  className={`flex h-[52px] min-w-11 items-center justify-center border-b-[3px] text-sm whitespace-nowrap transition-colors ${
                     isActive
                       ? "border-brand font-extrabold text-paper"
                       : "border-transparent font-bold text-subtle hover:text-paper"
