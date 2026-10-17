@@ -9,12 +9,19 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# O CI só lê o código: um pacote comprometido no `npm ci` não ganha permissão de escrita no repositório
+permissions:
+  contents: read
+
 jobs:
   check:
     name: Lint, tipos, testes e build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          # Não deixa o token salvo no .git para os passos seguintes (npm ci, build)
+          persist-credentials: false
 
       - uses: actions/setup-node@v6
         with:

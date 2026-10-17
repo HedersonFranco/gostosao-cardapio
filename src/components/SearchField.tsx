@@ -29,14 +29,19 @@ export function SearchField({ value, onChange }: SearchFieldProps) {
           placeholder="O que você procura?"
           autoComplete="off"
           enterKeyHint="search"
-          className="h-full min-w-0 flex-1 bg-transparent text-[15px] font-semibold text-paper outline-none placeholder:text-subtle focus-visible:outline-none"
+          // 16 px no mínimo: com fonte menor, o iPhone dá zoom na página ao focar o campo
+          className="h-full min-w-0 flex-1 bg-transparent text-base font-semibold text-paper outline-none placeholder:text-subtle focus-visible:outline-none"
         />
         {value && (
           <button
             type="button"
-            onClick={() => onChange("")}
+            onClick={() => {
+              onChange("");
+              // O botão some com o campo vazio; o foco volta para o campo em vez de cair no início da página
+              document.getElementById(SEARCH_INPUT_ID)?.focus();
+            }}
             aria-label="Limpar busca"
-            className="grid size-10 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
+            className="grid size-11 shrink-0 place-items-center rounded-full text-paper transition-colors hover:bg-white/10"
           >
             <CloseIcon className="size-5" />
           </button>

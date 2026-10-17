@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /** Distância do topo em que uma seção passa a contar como "atual" (altura da barra + folga). */
 const ACTIVE_OFFSET = 80;
+/** Tempo sem eventos de rolagem para considerar que a rolagem suave terminou. */
+const SCROLL_IDLE_MS = 150;
 
 /**
  * Descobre qual seção está na tela enquanto o cliente rola.
@@ -12,6 +14,9 @@ const ACTIVE_OFFSET = 80;
 export function useActiveSection(ids: string[]) {
   const key = ids.join("|");
   const [active, setActive] = useState<string | undefined>(ids[0]);
+  // Depois de um clique no menu, a rolagem suave passa por outras seções.
+  // Enquanto ela não termina, a seção clicada continua marcada.
+  const holdRef = useRef(() => {});
 
   useEffect(() => {
     const elements = key
@@ -21,6 +26,8 @@ export function useActiveSection(ids: string[]) {
     if (elements.length === 0) return;
 
     let frame = 0;
+    let idle = 0;
+    let holding = false;
     const update = () => {
       frame = 0;
       const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
@@ -35,8 +42,19 @@ export function useActiveSection(ids: string[]) {
       }
       setActive(current);
     };
+    const holdUntilIdle = () => {
+      holding = true;
+      window.clearTimeout(idle);
+      idle = window.setTimeout(() => (holding = false), SCROLL_IDLE_MS);
+    };
     const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
+      if (holding) holdUntilIdle();
+      else if (!frame) frame = requestAnimationFrame(update);
+    };
+    holdRef.current = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      holdUntilIdle();
     };
 
     update();
@@ -46,8 +64,14 @@ export function useActiveSection(ids: string[]) {
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
       cancelAnimationFrame(frame);
+      window.clearTimeout(idle);
     };
   }, [key]);
 
-  return [active, setActive] as const;
+  const select = (id: string) => {
+    setActive(id);
+    holdRef.current();
+  };
+
+  return [active, select] as const;
 }

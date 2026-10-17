@@ -29,6 +29,8 @@ npm run dev     # http://localhost:3000
 npm run check   # lint, tipos e testes
 ```
 
+O `npm run dev` só aceita conexões do próprio computador. Para abrir no celular pela rede, rode `npx next dev -H 0.0.0.0` só numa rede em que você confia e feche quando terminar: as rotas internas do servidor de desenvolvimento não pedem senha.
+
 ## Onde mexer
 
 - O cardápio inteiro fica em `src/data/menu.ts`. Os preços estão em centavos: R$ 18,00 vira `1800`.
