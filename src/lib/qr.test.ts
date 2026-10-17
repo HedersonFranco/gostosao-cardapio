@@ -38,6 +38,13 @@ describe("qrUrlProblem", () => {
     expect(qrUrlProblem("https://vercel.app.gostosao.com.br/")).toBeNull();
   });
 
+  it("bloqueia o endereço de exemplo do .env.example e outros nomes reservados", () => {
+    for (const url of ["https://cardapio.example/", "https://site.test/", "https://example.com/", "https://www.example.org/"]) {
+      expect(qrUrlProblem(url), url).toMatch(/exemplo/);
+    }
+    expect(qrUrlProblem("https://myexample.com/")).toBeNull();
+  });
+
   it("bloqueia domínio próprio sem https", () => {
     expect(qrUrlProblem("http://gostosao.com.br/")).toMatch(/https/);
   });

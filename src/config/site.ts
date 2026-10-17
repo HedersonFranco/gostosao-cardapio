@@ -31,7 +31,7 @@ export const site = {
  * Endereço público do site, usado nos QR codes, no sitemap e nas tags de compartilhamento.
  *
  * Ordem de prioridade:
- * 1. NEXT_PUBLIC_SITE_URL (defina quando tiver o domínio final, ex.: https://gostosaolanches.com.br)
+ * 1. NEXT_PUBLIC_SITE_URL (o domínio da lanchonete; obrigatório para imprimir os QR codes)
  * 2. VERCEL_PROJECT_PRODUCTION_URL (preenchida automaticamente pela Vercel no build)
  * 3. http://localhost:3000 (desenvolvimento)
  */
