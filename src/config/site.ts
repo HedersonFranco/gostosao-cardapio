@@ -2,6 +2,13 @@
  * Dados da lanchonete e configurações do site.
  * Tudo que o dono pode querer mudar sem mexer em componentes fica aqui.
  */
+
+/**
+ * O @ sai impresso nos cartões das mesas. Se trocar ou apagar a conta, reimprima os cartões antes:
+ * o @ antigo fica livre e outra pessoa pode registrá-lo.
+ */
+const instagramHandle = "gostosao_lanchesthe";
+
 export const site = {
   name: "Gostosão Lanches",
   shortName: "Gostosão",
@@ -15,8 +22,8 @@ export const site = {
     country: "BR",
   },
   instagram: {
-    handle: "gostosao_lanchesthe",
-    url: "https://instagram.com/gostosao_lanchesthe",
+    handle: instagramHandle,
+    url: `https://instagram.com/${instagramHandle}`,
   },
   mapsUrl:
     "https://www.google.com/maps/search/?api=1&query=Gostos%C3%A3o%20Lanches%2C%20Av.%20S%C3%A3o%20Raimundo%2C%202070%2C%20Teresina%20-%20PI",
